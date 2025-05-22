@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Page Clients</title>
+        <!-- Librairie Javascript: jQuery (v3.4.1) -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>Liste des clients</h1>
+        <ul id="liste-clients"></ul>
+        <script>
+            $(document).ready(function() { 
+                console.log("Appel AJAX"); // affichage dans la console web
+                $.ajax ({
+                    // A FAIRE : écrire ici le code de l'appel AJAX avec le paramètre todo 
+                    url: "./ActionServlet",
+                    type: "GET",
+                    data: {todo: "consulter-liste-clients"},
+                    dataType: "json"
+                })
+                /* ------  laisser la suite en commentaire tant que vous n'avez pas implémenté la sérialisation JSON de la réponse !! */
+                . done (function(response) { 
+                    // traiter la réponse JSON
+                    let listeClient = response;
+                    
+                    console.log(response);
+                    
+                    $("#liste-clients").empty();
+                    for (const client of response) {
+                        $("#liste-clients").append($("<li>").text(client.nom));
+                    }
+                    
+                    
+                }) 
+                . fail (function(error) { 
+                    // traiter l'erreur
+                }) 
+                
+            });
+        </script>
+    </body>
+</html>
